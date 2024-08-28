@@ -21,4 +21,42 @@ class UsuarioController extends Controller
 
             return $user;
         }
+
+        public function findById($id){
+            $result = $this->usuarioService->findById($id);
+
+            return response()->json($result);
+        }
+
+        //não tem parametros, pois, ele vai listar todos
+        public function index(){
+            $result = $this->usuarioService->getAll();
+
+            return response()->json($result);
+        }
+
+        public function searchByName(Request $request){
+            $result = $this->usuarioService->searchByName($request->nome);
+
+            return response()->json($result);
+        }
+
+        public function searchByEmail(Request $request){
+            $result = $this->usuarioService->searchByEmail($request->email);
+
+            return response()->json($result);
+        }
+
+        public function delete($id){
+            $result = $this->usuarioService->delete($id);
+
+            return response()->json($result);
+        }
+
+        // para cadastrar/alterar nome ou dados, utilizamos a Request (mais valores na URL)
+        public function update(Request $request){
+            $result = $this->usuarioService->update($request->all()); // todos os dados 
+
+            return response()->json($result);
+        }
 }
